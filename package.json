@@ -1,0 +1,25 @@
+{
+  "name": "cypress-training",
+  "version": "1.0.0",
+  "description": "This is a Workshop about Cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carolinapasuy/cypress-excercise.git"
+  },
+  "keywords": [
+    "ui-testing",
+    "dojo",
+    "practice",
+    "cypress"
+  ],
+  "author": "[Carolina Pasuy] <carolinapasuy@hotmail.com> ([carolinapasuy])",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/carolinapasuy/cypress-excercise/issues"
+  },
+  "homepage": "https://github.com/carolinapasuy/cypress-excercise#readme"
+}
