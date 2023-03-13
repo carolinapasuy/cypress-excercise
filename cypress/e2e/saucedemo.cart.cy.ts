@@ -1,36 +1,47 @@
+import { LoginPage,InventoryPage } from "../page/index"
+let loginPage:LoginPage;
+let inventoryPage:InventoryPage;
+
 describe("Verifying Login Process for SauceDemo", () => {
     before(() => {
       cy.visit("https://www.saucedemo.com/");
+      loginPage= new LoginPage();
+      inventoryPage= new InventoryPage();
     });
     it("Login should work for existing user.", () => {
-        cy.get('[data-test="username"]').type("standard_user");
-        cy.get('[data-test="password"]').type("secret_sauce");
-        cy.get('[data-test="login-button"]').click();
+       
+        loginPage.login("standard_user","secret_sauce")
 
         //Verificar que exista un elemento Sauce Labs Backpack
-        cy.get('.inventory_item_name')
-        .should('contain', 'Sauce Labs Backpack');
+        inventoryPage.getInventoryItem().should(
+            'contain.text',
+            'Sauce Labs Backpack'
+        )
 
-        cy.get('[data-test="add-to-cart-sauce-labs-backpack"]')
-            .should('have.text', 'Add to cart')
-            .should('have.class', 'btn_primary')
+        inventoryPage.verifiedSauceLabsBackpack().should(
+            'have.text', 'Add to cart')
+            .should(
+            'have.class', 'btn_primary')
 
-        cy.get('[data-test="add-to-cart-sauce-labs-backpack"]').click();
+        inventoryPage.verifiedSauceLabsBackpackButton()
 
         //Verificar que el boton despues de darle click aparezca como remove
-        cy.get('[data-test="remove-sauce-labs-backpack"]')
-            .should('have.text', 'Remove')
-
+        inventoryPage.verifiedRemoveButtonSauceLabsBackpack().should(
+            'have.text', 
+            'Remove')
+    
         //Verificar que exista un elemento Sauce Labs Onesie
-        cy.get('[data-test="add-to-cart-sauce-labs-onesie"]')
-            .should('have.text', 'Add to cart')
-            .should('have.class', 'btn_primary')
+        inventoryPage.verifiedSauceLabsOnesie().should(
+            'have.text', 'Add to cart')
+            .should(
+            'have.class', 'btn_primary')
 
-        cy.get('[data-test="add-to-cart-sauce-labs-onesie"]').click();
+        inventoryPage.verifiedSauceLabsOnesieButton()
         
         //Verificar que el boton despues de darle click aparezca como remove
-        cy.get('[data-test="remove-sauce-labs-onesie"]')
-        .should('have.text', 'Remove')
+        inventoryPage.verifiedRemoveButtonSauceLabsOnesie().should(
+            'have.text', 
+            'Remove')
 
         //Verificar que hayan 2 productos en el carro
         cy.get('.shopping_cart_badge')
