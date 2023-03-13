@@ -48,6 +48,12 @@ class InventoryPage {
         this.removeButtonNameItem="[data-test='remove-sauce-labs-onesie']";
         return cy.get(this.removeButtonNameItem);
     }
+    public verifiedshoppingCartBadge() {
+        return cy.get(this.shoppingCartBadge);
+    }
+    public clickshoppingCartBadgeLink() {
+        cy.get(this.shoppingCartBadgeLink).click();
+    }
 }
 
 export { InventoryPage }
