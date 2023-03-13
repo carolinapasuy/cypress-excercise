@@ -1,12 +1,14 @@
-import { LoginPage,InventoryPage } from "../page/index"
+import { LoginPage,InventoryPage,ShoppingCartPage } from "../page/index"
 let loginPage:LoginPage;
 let inventoryPage:InventoryPage;
+let shoppingCartPage:ShoppingCartPage;
 
 describe("Verifying Login Process for SauceDemo", () => {
     before(() => {
       cy.visit("https://www.saucedemo.com/");
       loginPage= new LoginPage();
       inventoryPage= new InventoryPage();
+      shoppingCartPage= new ShoppingCartPage();
     });
     it("Login should work for existing user.", () => {
        
@@ -44,22 +46,26 @@ describe("Verifying Login Process for SauceDemo", () => {
             'Remove')
 
         //Verificar que hayan 2 productos en el carro
-        cy.get('.shopping_cart_badge')
-        .should('have.text', '2');
+        inventoryPage.verifiedshoppingCartBadge().should(
+            'have.text',
+             '2');
 
-        cy.get('.shopping_cart_link').click();
+        inventoryPage.clickshoppingCartBadgeLink()
 
         //Verificar que hayan 2 productos en la lista
-        cy.get('.cart_list .cart_item')
-        .should('have.length', 2);
+        shoppingCartPage.getlistItem().should(
+            'have.length', 
+            2);
 
         //Verificar que exista un elemento Sauce Labs Backpack en la lista
-        cy.get('.inventory_item_name')
-        .should('contain', 'Sauce Labs Backpack');
+        shoppingCartPage.getinventoryNameItem().should(
+            'contain.text', 
+            'Sauce Labs Backpack');
 
         //Verificar que exista un elemento Sauce Labs Onesie en la lista
-        cy.get('.inventory_item_name')
-        .should('contain', 'Sauce Labs Onesie');
+        shoppingCartPage.getinventoryNameItem().should(
+            'contain', 
+            'Sauce Labs Onesie');
     });
 
 
