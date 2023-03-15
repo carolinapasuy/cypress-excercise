@@ -1,15 +1,12 @@
 name: Cypress tests on Pull Request
-on:
-  pull_request:
+on:[pull_request]
 jobs:
-  cypress-run:
+   cypress-run:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Cypress.io
-      uses: cypress-io/github-action@v5.3.0
-      with:
-        start: npm start
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
     
     
